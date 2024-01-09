@@ -1,0 +1,413 @@
+@import url('https://fonts.googleapis.com/css2?family=Qwitcher+Grypen:wght@300;400;500;700&display=swap');
+
+/**
+ * Reset css.
+ */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+/**
+ * Déclaration des couleurs.
+ */
+:root {
+    --backgroundColor: #f1f0eb;
+    --headerColor: #d79922;
+    --headerPaleColor: #efe1ba;
+    --titleColor: #f13c1f;
+    --dateColor: #3f56a4;
+    --quoteColor: #c5cbe4;
+    --commentPaleColor: #99a140;
+    --commentColor: #255E33;
+}
+
+/**
+ * Valeur par défaut pour les balises.
+ */
+body {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    font-family: 'arial', sans-serif;
+    background-color: var(--backgroundColor);
+}
+
+h1 {
+    display: flex;
+    justify-content: center;
+    padding: 30px;
+    font-family: 'Qwitcher Grypen', cursive;
+    font-style: italic;
+    font-size: 80px;
+    color: var(--titleColor);
+}
+
+h2 {
+    width: 100%;
+    margin: 20px 0;
+    font-size: 25px;
+    font-family: 'Times New Roman', Times, serif;
+    color: var(--headerColor);
+}
+
+ul {
+    list-style: none;
+}
+
+a {
+    text-decoration: none;
+    color: inherit;
+}
+
+/**
+ * Styles des formulaires.
+ */
+form {
+    width: 100%;
+    margin-top: 30px;
+    padding: 20px;
+    color: white;
+    background-color: var(--commentPaleColor);
+}
+
+form h2 {
+    margin: 0 0 20px 0;
+    color: white;
+}
+form label {
+    font-weight: bold;
+    font-size: 14px;
+}
+
+form input {
+    padding: 5px;
+    border: none;
+}
+
+form textarea {
+    height: 150px;
+    padding: 5px;
+    font-family: Arial, Helvetica, sans-serif;
+    border: none;
+}
+
+form .formGrid {
+    display: grid;
+    grid-template-columns: 100px minmax(0, 1fr); /* Une colonne de 100px et une autre de largeur automatique */
+    gap: 10px; /* Espace entre les éléments de la grille */
+}
+
+form .formGrid .submit {
+    grid-column: 2; /* Place l'élément dans la deuxième colonne (la dernière) */
+    grid-row: 3; /* Place l'élément dans la troisième rangée (la dernière) */
+}
+
+.submit {
+    padding: 5px 10px;
+    font-weight: bold;
+    color: white;
+    background-color: var(--commentColor);
+    border: none;
+}
+
+/**
+ * Coin replié des formulaires
+ */
+.foldedCorner {
+    position: relative;
+    overflow: hidden;
+} 
+
+.foldedCorner::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    right: 0;
+    width: 0;
+    height: 0;
+    border-width: 30px;
+    border-style: solid;
+    border-color: var(--backgroundColor) var(--backgroundColor) var(--commentColor) var(--commentColor);
+}
+
+/**
+ * Header
+ */
+header {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    margin-bottom: 30px;
+    background-color: var(--headerPaleColor); 
+}
+
+header > nav {
+    display: flex;
+    justify-content: flex-end;
+    background-color: var(--headerColor);
+}
+
+header > nav > a {
+    padding: 20px;
+    text-transform: uppercase;
+    font-size: 16px;
+    color: white;
+}
+
+/**
+ * Coeur de page.
+ */
+main {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 80%;
+    max-width: 1000px;
+    margin: 0 50px 100px 50px;
+}
+
+/* Affichage des articles */
+
+.articleList {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: space-between;
+}
+
+.articleList > article {
+    width: 30%;
+}
+
+article {
+    margin-bottom: 30px;
+    text-align: justify;
+}
+
+article > h2 {
+    color: var(--headerColor);
+}
+
+.articleList > article:hover h2 {
+    color: var(--titleColor);
+}
+
+article > .quotation {
+    /* Placement du guillemet initial de manière à ce que le texte s'affiche "autour" */
+    float: left;
+    height: 51px;
+    margin-left: -10px;
+    line-height: 0.35;
+    font-family: Arial, Helvetica, sans-serif;
+    font-weight: bold;
+    font-size: 103px;
+    color: var(--quoteColor);
+}
+
+.articleList > article:hover .quotation {
+    color: var(--commentPaleColor);
+}
+
+article > p {
+    margin-bottom: 10px;
+    font-style: italic;
+    font-size: 15px;
+}
+
+article > .footer {
+    margin-top: 20px;
+    display: flex;
+    justify-content: space-between;
+}
+
+.info {
+    font-size: 14px;
+    font-style: italic;
+    font-weight: bold;
+    color: var(--dateColor);
+}
+
+.articleList > article:hover .info {
+    color: var(--commentPaleColor);
+}
+
+a.info {
+    font-style: normal;
+}
+
+
+/* Page de détail d'un article */
+
+.mainArticle .footer {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+}
+
+/* Affichage des commentaires */
+.comments {
+    width: 100%;
+    margin-top: 30px;
+}
+
+.commentsTitle {
+    color: var(--titleColor);
+}
+
+.comments ul {
+    margin-bottom: 30px;
+}
+
+.comments li {
+    display: flex;
+    margin-bottom: 20px;
+}
+
+.comments .smiley {
+    display: flex;
+    align-items: flex-start;
+    line-height: 0.7;
+    font-size: 60px;
+    color: var(--quoteColor);
+}
+
+/* On redéfinit certaines parties du "info" pour l'affichage dans les commentaires */
+.detailComment .info {
+    margin: 5px 0 5px 0;
+    font-style: normal;
+}
+
+.detailComment .content {
+    margin: 5px 0 5px 0;
+}
+
+/* Page d'erreur */
+
+.error {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    margin-top: 50px;
+}
+
+.error h2 {
+    color: var(--titleColor)
+}
+
+.error a {
+    margin: 20px;
+    color: var(--headerColor);
+    font-weight: bold;
+}
+
+/**
+ * Partie admin
+ */ 
+
+.adminArticle {
+    margin-bottom: 20px;
+    background-color: var(--commentPaleColor);
+    color: white;
+}
+
+.articleLine {
+    display: flex; 
+}
+
+.articleLine div {
+    display: flex;
+    align-items: center;
+}
+
+.articleLine .title {
+    font-weight: bold;
+    min-width: 200px;
+    width: 200px;
+}
+
+.articleLine .content {
+    flex-grow: 1;
+}
+
+.articleLine > div {
+    padding: 20px;
+    border: 1px solid var(--backgroundColor);
+}
+
+/** 
+ * Footer global de la page.
+ */
+footer {
+    position: fixed;
+    bottom: 0;
+    display: flex;
+    justify-content: center;
+    width: 100%;;
+    padding: 20px;
+    color: white;
+    background-color: var(--headerColor);
+}
+
+/*Page Monitoring*/
+.adminMonitoring {
+    margin-top: 20px;
+    color: white;
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-bottom: 20px;
+}
+
+th, td {
+    padding: 10px;
+    border: 1px solid #ddd;
+    text-align: left;
+}
+
+th {
+    background-color: var(--commentPaleColor);
+}
+
+tr{
+    background-color: var(--commentPaleColor);
+}
+
+tr:nth-child(odd) {
+    background-color: var(--commentColor);
+}
+
+.arrayHeader{
+    display: flex;
+    justify-content: space-between;
+}
+
+.arrow{
+    width: 0;
+    height: 0;
+    border-right: 7px solid transparent;
+    border-left: 7px solid transparent;
+    border-bottom: 7px solid lightgray;
+}
+
+.arrow-down{
+    width: 0;
+    height: 0;
+    border-right: 7px solid transparent;
+    border-left: 7px solid transparent;
+    border-top: 7px solid lightgray;
+}
+
+.arrayArrow{
+    display: flex;
+    align-items: center;
+}
+
+.supprimer{
+    font-weight: bold;
+    color: red;
+}
