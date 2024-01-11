@@ -5,14 +5,6 @@
  
 class AdminController  {
 
-    public function __construct()
-    {
-        // On vérifie que l'utilisateur est connecté.
-        if (empty($_SESSION['user'])) {
-            Utils::redirect("connectionForm");
-            exit;
-        }
-    }
 
     /**
      * Affiche la page d'administration.
@@ -20,6 +12,8 @@ class AdminController  {
      */
     public function showAdmin() : void
     {
+        // On vérifie que l'utilisateur est connecté.
+        $this->checkIfUserIsConnected();
 
         // On récupère les articles.
         $articleManager = new ArticleManager();
@@ -30,6 +24,18 @@ class AdminController  {
         $view->render("admin", [
             'articles' => $articles
         ]);
+    }
+
+    /**
+     * Vérifie que l'utilisateur est connecté.
+     * @return void
+     */
+    private function checkIfUserIsConnected() : void
+    {
+        // On vérifie que l'utilisateur est connecté.
+        if (!isset($_SESSION['user'])) {
+            Utils::redirect("connectionForm");
+        }
     }
 
     /**
@@ -97,6 +103,7 @@ class AdminController  {
      */
     public function showUpdateArticleForm() : void 
     {
+        $this->checkIfUserIsConnected();
 
         // On récupère l'id de l'article s'il existe.
         $id = Utils::request("id", -1);
@@ -124,6 +131,7 @@ class AdminController  {
      */
     public function updateArticle() : void 
     {
+        $this->checkIfUserIsConnected();
 
         // On récupère les données du formulaire.
         $id = Utils::request("id", -1);
@@ -158,6 +166,7 @@ class AdminController  {
      */
     public function deleteArticle() : void
     {
+        $this->checkIfUserIsConnected();
 
         $id = Utils::request("id", -1);
 
@@ -177,6 +186,8 @@ class AdminController  {
     {
         $sort = Utils::request('sort', 'asc');
         $column = Utils::request('column', 'id');
+        $this->checkIfUserIsConnected();
+
 
         $articleManager = new ArticleManager();
         $articles = $articleManager->findAllForMonitoring($column, $sort);
@@ -229,6 +240,7 @@ class AdminController  {
     public function showComments() : void
     {
         $articleId = Utils::request('id', 0);
+        $this->checkIfUserIsConnected();
 
         if ($articleId <= 0) {
             echo "ID d'article invalide.";
