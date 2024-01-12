@@ -17,7 +17,9 @@ class ArticleManager extends AbstractEntityManager
     
         while ($articleData = $result->fetch(PDO::FETCH_ASSOC)) {
             $article = new Article($articleData);
+            $article->setViews($this->getViewsCount($article->getId()));
             $article->setComments($article->getComments());
+            $article->setDateCreation($this->CreationDate($article->getId()));
             $articles[] = $article;
         }
     

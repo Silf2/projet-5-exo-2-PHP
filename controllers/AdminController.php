@@ -194,9 +194,7 @@ class AdminController  {
         $commentManager = new CommentManager();
 
         foreach ($articles as $article) {
-            $article->setViews($articleManager->getViewsCount($article->getId()));
             $article->setComments($commentManager->getCommentCount($article->getId()));
-            $article->setDateCreation($articleManager->CreationDate($article->getId()));
         }
 
         $view = new View("Détail des articles");
